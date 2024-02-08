@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Todo, TodoRole } from '../app/todos/todo';
+import { Todo } from '../app/todos/todo';
 import { TodoService } from '../app/todos/todo.service';
 
 /**
@@ -12,31 +12,32 @@ import { TodoService } from '../app/todos/todo.service';
 export class MockTodoService extends TodoService {
   static testTodos: Todo[] = [
     {
-      _id: 'chris_id',
-      name: 'Chris',
-      age: 25,
-      company: 'UMM',
-      email: 'chris@this.that',
-      role: 'admin',
-      avatar: 'https://gravatar.com/avatar/8c9616d6cc5de638ea6920fb5d65fc6c?d=identicon'
+      "_id": "58895985a22c04e761776d54",
+      "owner": "Blanche",
+      "status": false,
+      "body": "In sunt ex non tempor cillum commodo amet incididunt anim qui commodo quis. Cillum non labore ex sint esse.",
+      "category": "software design"
     },
     {
-      _id: 'pat_id',
-      name: 'Pat',
-      age: 37,
-      company: 'IBM',
-      email: 'pat@something.com',
-      role: 'editor',
-      avatar: 'https://gravatar.com/avatar/b42a11826c3bde672bce7e06ad729d44?d=identicon'
+      "_id": "58895985c1849992336c219b",
+      "owner": "Fry",
+      "status": false,
+      "body": "Ipsum esse est ullamco magna tempor anim laborum non officia deserunt veniam commodo. Aute minim incididunt ex commodo.",
+      "category": "video games"
     },
     {
-      _id: 'jamie_id',
-      name: 'Jamie',
-      age: 37,
-      company: 'Frogs, Inc.',
-      email: 'jamie@frogs.com',
-      role: 'viewer',
-      avatar: 'https://gravatar.com/avatar/d4a6c71dd9470ad4cf58f78c100258bf?d=identicon'
+      "_id": "58895985ae3b752b124e7663",
+      "owner": "Fry",
+      "status": true,
+      "body": "Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.",
+      "category": "homework"
+    },
+    {
+      "_id": "58895985186754887e0381f5",
+      "owner": "Blanche",
+      "status": true,
+      "body": "Incididunt enim ea sit qui esse magna eu. Nisi sunt exercitation est Lorem consectetur incididunt cupidatat laboris commodo veniam do ut sint.",
+      "category": "software design"
     }
   ];
 
@@ -47,7 +48,7 @@ export class MockTodoService extends TodoService {
   // It's OK that the `_filters` argument isn't used here, so we'll disable
   // this warning for just his function.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getTodos(_filters: { role?: TodoRole; age?: number; company?: string }): Observable<Todo[]> {
+  getTodos(_filters: { owner?: string; status?: boolean; body?: string; category?: string }): Observable<Todo[]> {
     // Our goal here isn't to test (and thus rewrite) the service, so we'll
     // keep it simple and just return the test todos regardless of what
     // filters are passed in.
