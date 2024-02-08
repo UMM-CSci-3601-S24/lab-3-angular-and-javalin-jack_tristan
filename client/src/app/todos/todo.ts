@@ -5,5 +5,3 @@ export interface Todo {
   body: string;
   category: string;
 }
-
-export type TodoRole = 'admin' | 'editor' | 'viewer';
