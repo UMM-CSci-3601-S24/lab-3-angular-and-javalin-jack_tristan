@@ -12,8 +12,7 @@ import { MatCard, MatCardHeader, MatCardAvatar, MatCardTitle, MatCardSubtitle, M
     standalone: true,
     imports: [MatCard, MatCardHeader, MatCardAvatar, MatCardTitle, MatCardSubtitle, MatCardContent, MatCardActions, MatButton, RouterLink]
 })
-export class UserCardComponent {
-
+export class TodoCardComponent {
   @Input() todo: Todo;
   @Input() simple ? = false;
 }

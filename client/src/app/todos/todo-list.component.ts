@@ -5,8 +5,7 @@ import { TodoService } from './todo.service';
 import { Subject, takeUntil } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { MatNavList, MatListSubheaderCssMatStyler, MatListItem, MatListItemTitle, MatListItemLine } from '@angular/material/list';
-//import { UserCardComponent } from './user-card.component';
-
+import { TodoCardComponent} from './todo-card.component';
 import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
@@ -26,12 +25,12 @@ import { MatCard, MatCardTitle, MatCardContent } from '@angular/material/card';
  */
 
 @Component({
-  selector: 'app-todo-list-component',
-  templateUrl: 'todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss'],
-  providers: [],
-  standalone: true,
-  imports: [MatCard, MatCardTitle, MatCardContent, MatFormField, MatLabel, MatInput, FormsModule, MatHint, MatSelect, MatOption, MatRadioGroup, MatRadioButton, MatNavList, MatListSubheaderCssMatStyler, MatListItem, RouterLink, MatListItemTitle, MatListItemLine, MatError]
+    selector: 'app-todo-list-component',
+    templateUrl: 'todo-list.component.html',
+    styleUrls: ['./todo-list.component.scss'],
+    providers: [],
+    standalone: true,
+    imports: [TodoCardComponent, MatCard, MatCardTitle, MatCardContent, MatFormField, MatLabel, MatInput, FormsModule, MatHint, MatSelect, MatOption, MatRadioGroup, MatRadioButton, MatNavList, MatListSubheaderCssMatStyler, MatListItem, RouterLink, MatListItemTitle, MatListItemLine, MatError]
 })
 export class TodoListComponent implements OnInit, OnDestroy {
   // These are public so that tests can reference them (.spec.ts)
