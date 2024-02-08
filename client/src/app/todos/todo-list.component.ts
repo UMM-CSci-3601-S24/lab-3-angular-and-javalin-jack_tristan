@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-//import { User, UserRole } from './user';
-//import { UserService } from './user.service';
+import { Todo } from './todo';
+import { TodoService } from './todo.service';
 import { Subject, takeUntil } from 'rxjs';
 import { RouterLink } from '@angular/router';
-import { MatNavList, MatListSubheaderCssMatStyler, MatListItem, MatListItemAvatar, MatListItemTitle, MatListItemLine } from '@angular/material/list';
+import { MatNavList, MatListSubheaderCssMatStyler, MatListItem, MatListItemTitle, MatListItemLine } from '@angular/material/list';
 //import { UserCardComponent } from './user-card.component';
 
 import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatHint, MatError } from '@angular/material/form-field';
 import { MatCard, MatCardTitle, MatCardContent } from '@angular/material/card';
+
 
 /**
  * A component that displays a list of todos, either as a grid
@@ -30,7 +31,7 @@ import { MatCard, MatCardTitle, MatCardContent } from '@angular/material/card';
   styleUrls: ['./todo-list.component.scss'],
   providers: [],
   standalone: true,
-  imports: [MatCard, MatCardTitle, MatCardContent, MatFormField, MatLabel, MatInput, FormsModule, MatHint, MatSelect, MatOption, MatRadioGroup, MatRadioButton, UserCardComponent, MatNavList, MatListSubheaderCssMatStyler, MatListItem, RouterLink, MatListItemAvatar, MatListItemTitle, MatListItemLine, MatError]
+  imports: [MatCard, MatCardTitle, MatCardContent, MatFormField, MatLabel, MatInput, FormsModule, MatHint, MatSelect, MatOption, MatRadioGroup, MatRadioButton, MatNavList, MatListSubheaderCssMatStyler, MatListItem, RouterLink, MatListItemTitle, MatListItemLine, MatError]
 })
 export class TodoListComponent implements OnInit, OnDestroy {
   // These are public so that tests can reference them (.spec.ts)
@@ -84,7 +85,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   public updateFilter() {
-    this.filteredTodos = this.userService.filterTodos(
+    this.filteredTodos = this.todoService.filterTodos(
       this.serverFilteredTodos, { owner: this.todoOwner,
                                   status: this.todoStatus,
                                   category: this.todoCategory,
