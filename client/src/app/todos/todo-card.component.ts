@@ -6,7 +6,7 @@ import { MatCard, MatCardHeader, MatCardAvatar, MatCardTitle, MatCardSubtitle, M
 
 
 @Component({
-    selector: 'app-user-card',
+    selector: 'app-todo-card',
     templateUrl: './todo-card.component.html',
     styleUrls: ['./todo-card.component.scss'],
     standalone: true,
