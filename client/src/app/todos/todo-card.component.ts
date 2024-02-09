@@ -13,6 +13,7 @@ import { MatCard, MatCardHeader, MatCardAvatar, MatCardTitle, MatCardSubtitle, M
     imports: [MatCard, MatCardHeader, MatCardAvatar, MatCardTitle, MatCardSubtitle, MatCardContent, MatCardActions, MatButton, RouterLink]
 })
 export class TodoCardComponent {
+
   @Input() todo: Todo;
   @Input() simple ? = false;
 }
