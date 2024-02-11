@@ -63,11 +63,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
    */
   getTodosFromServer() {
     this.todoService.getTodos({
-      owner: this.todoOwner,
-      status: this.todoStatus,
-      category: this.todoCategory,
-      body: this.todoBody,
-      limit: this.todoLimit
+      category: this.todoCategory
     }).pipe(
       takeUntil(this.ngUnsubscribe)
     ).subscribe({
