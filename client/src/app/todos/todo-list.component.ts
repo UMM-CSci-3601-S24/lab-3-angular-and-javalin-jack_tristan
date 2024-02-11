@@ -41,6 +41,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   public todoStatus: boolean;
   public todoCategory: string;
   public todoBody: string;
+  public todoLimit: number;
   public viewType: 'card' | 'list' = 'card';
 
   errMsg = '';
@@ -65,7 +66,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
       owner: this.todoOwner,
       status: this.todoStatus,
       category: this.todoCategory,
-      body: this.todoBody
+      body: this.todoBody,
+      limit: this.todoLimit
     }).pipe(
       takeUntil(this.ngUnsubscribe)
     ).subscribe({
@@ -88,7 +90,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
       this.serverFilteredTodos, { owner: this.todoOwner,
                                   status: this.todoStatus,
                                   category: this.todoCategory,
-                                  body: this.todoBody }
+                                  body: this.todoBody,
+                                  limit: this.todoLimit}
     );
   }
 

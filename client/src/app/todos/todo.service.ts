@@ -21,7 +21,7 @@ export class TodoService {
    * @param filters a map that allows us to specify a target title, description, or category to filter by, or any combination of those
    * @returns an `Observable` of an array of `Todos`.
    */
-  getTodos(filters?: { owner?: string; status?: boolean; body?: string; category?: string}): Observable<Todo[]> {
+  getTodos(filters?: { owner?: string; status?: boolean; body?: string; category?: string; limit?: number}): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
       if (filters.owner) {
@@ -36,6 +36,10 @@ export class TodoService {
       if (filters.category) {
         httpParams = httpParams.set('category', filters.category);
       }
+      if (filters.limit) {
+        httpParams = httpParams.set('limit', filters.limit);
+      }
+
     }
     return this.httpClient.get<Todo[]>(this.todoUrl, {
       params: httpParams,
@@ -49,25 +53,29 @@ export class TodoService {
     return this.httpClient.get<Todo>(this.todoUrl + '/' + id);
   }
 
-  filterTodos(todos: Todo[], filters: { owner?: string; status?: boolean; body?: string; category?: string}): Todo[] {
+  filterTodos(todos: Todo[], filters: { owner?: string; status?: boolean; body?: string; category?: string; limit?: number}): Todo[] {
     let filteredTodos = todos;
     if (filters) {
       if (filters.owner) {
         filters.owner = filters.owner.toLowerCase();
-        filteredTodos = filteredTodos.filter(todo => todo.owner.indexOf(filters.owner) !== -1);
+        filteredTodos = filteredTodos.filter(todo => todo.owner.toLowerCase().indexOf(filters.owner) !== -1);
       }
       // make sure the status filter is working!
-      if (filters.status) {
+      if (filters.status !== undefined) {
         filteredTodos = filteredTodos.filter(todo => todo.status === filters.status);
       }
       if (filters.body) {
         filters.body = filters.body.toLowerCase();
-        filteredTodos = filteredTodos.filter(todo => todo.body.indexOf(filters.body) !== -1);
+        filteredTodos = filteredTodos.filter(todo => todo.body.toLowerCase().indexOf(filters.body) !== -1);
       }
       if (filters.category) {
         filters.category = filters.category.toLowerCase();
         filteredTodos = filteredTodos.filter(todo => todo.category.indexOf(filters.category) !== -1);
       }
+      if (filters.limit) {
+        filteredTodos = filteredTodos.slice(0, filters.limit);
+      }
+
     }
     return filteredTodos;
   }
