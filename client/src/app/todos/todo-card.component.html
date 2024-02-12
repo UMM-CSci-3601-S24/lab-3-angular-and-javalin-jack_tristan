@@ -2,7 +2,7 @@
   <mat-card appearance="outlined" class="user-card" style="width: 150px;">
       <mat-card-title class="todo-card-owner" style="text-align: center;">{{this.todo.owner}}</mat-card-title>
       <hr style="border-top: thick 1px;" width="100%"/>
-      <mat-card-subtitle class="todo-card-status">{{this.todo.status}}</mat-card-subtitle>
+      <mat-card-subtitle class="todo-card-status">Completed: {{this.todo.status}}</mat-card-subtitle>
       <mat-card-subtitle class="todo-cards-category">{{this.todo.category}}</mat-card-subtitle>
 
     @if (!this.simple) {

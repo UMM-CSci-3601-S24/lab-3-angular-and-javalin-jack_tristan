@@ -74,6 +74,30 @@ describe('TodoListComponent', () => {
     expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Barry')).toBe(false);
   });
 
+  it('has two todos that are true', () => {
+    expect(todoList.serverFilteredTodos.filter((todo: Todo) => todo.status === true).length).toBe(2);
+  });
+
+  it('has two todos that are false', () => {
+    expect(todoList.serverFilteredTodos.filter((todo: Todo) => todo.status === false).length).toBe(2);
+  });
+
+  it('has a todo with the category "software design"', () => {
+    expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.category === 'software design')).toBe(true);
+  });
+
+  it('has a todo with the category "video games"', () => {
+    expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.category === 'video games')).toBe(true);
+  });
+
+  it('has a todo with the category "homework"', () => {
+    expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.category === 'homework')).toBe(true);
+  });
+
+  it('does not have a todo with the body "Mow the lawn"', () => {
+    expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.body === 'Mow the lawn')).toBe(false);
+  });
+
   // Test coverage is not complete yet
 
 });
