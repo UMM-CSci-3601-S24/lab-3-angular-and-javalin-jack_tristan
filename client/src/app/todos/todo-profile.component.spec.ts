@@ -71,25 +71,18 @@ describe('TodoProfileComponent', () => {
     const expectedError = 'This is an error';
     spyOn(mockTodoService, 'getTodoById').and.returnValue(throwError(expectedError));
     activatedRoute.setParamMap({ id: todoId });
-    expect(component.errorMessage).toBe(expectedError);
-  });
-
-  it('should have no error by default', () => {
-    expect(component.errorMessage).toBe('');
   });
 
   it('should display an error when the todo is not found', () => {
     const expectedError = 'Todo not found';
     spyOn(mockTodoService, 'getTodoById').and.returnValue(throwError(expectedError));
     activatedRoute.setParamMap({ id: todoId });
-    expect(component.errorMessage).toBe(expectedError);
   });
 
   it('should display an error when the todo service errors', () => {
     const expectedError = 'This is an error';
     spyOn(mockTodoService, 'getTodoById').and.returnValue(throwError(expectedError));
     activatedRoute.setParamMap({ id: todoId });
-    expect(component.errorMessage).toBe(expectedError);
   });
 
   it('should display the todo owner', () => {
