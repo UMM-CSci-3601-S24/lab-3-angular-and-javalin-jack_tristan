@@ -14,7 +14,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-//import { Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MockTodoService } from '../../testing/todo.service.mock';
 import { Todo } from './todo';
 import { TodoCardComponent } from './todo-card.component';
@@ -97,7 +97,52 @@ describe('TodoListComponent', () => {
   it('does not have a todo with the body "Mow the lawn"', () => {
     expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.body === 'Mow the lawn')).toBe(false);
   });
-
-  // Test coverage is not complete yet
-
 });
+
+describe('Misbehaving Todo List', () => {
+  let todoList: TodoListComponent;
+  let fixture: ComponentFixture<TodoListComponent>;
+
+  let todoServiceStub: {
+    getTodos: () => Observable<Todo[]>;
+    getTodosFiltered: () => Observable<Todo[]>;
+  };
+
+  beforeEach(() => {
+    // stub TodoService for test purposes
+    todoServiceStub = {
+      getTodos: () => new Observable(observer => {
+        observer.error('getTodos() Observer generates an error');
+      }),
+      getTodosFiltered: () => new Observable(observer => {
+        observer.error('getTodosFiltered() Observer generates an error');
+      })
+    };
+
+    TestBed.configureTestingModule({
+    imports: [COMMON_IMPORTS, TodoListComponent],
+    // providers:    [ TodoService ]  // NO! Don't provide the real service!
+    // Provide a test-double instead
+    providers: [{ provide: TodoService, useValue: todoServiceStub }]
+});
+  });
+
+  // Construct the `todoList` used for the testing in the `it` statement
+  // below.
+  beforeEach(waitForAsync(() => {
+    TestBed.compileComponents().then(() => {
+      fixture = TestBed.createComponent(TodoListComponent);
+      todoList = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+  }));
+
+  it('fails to load todos if we do not set up a TodoListService', () => {
+    // Since calling both getTodos() and getTodosFiltered() return
+    // Observables that then throw exceptions, we don't expect the component
+    // to be able to get a list of todos, and serverFilteredTodos should
+    // be undefined.
+    expect(todoList.serverFilteredTodos).toBeUndefined();
+  });
+});
+
